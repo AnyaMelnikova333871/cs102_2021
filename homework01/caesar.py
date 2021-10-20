@@ -1,7 +1,4 @@
-import typing as tp
-
-
-def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
+def encrypt_caesar(plaintext, shift=3):
     """
     Encrypts plaintext using a Caesar cipher.
 
@@ -14,12 +11,23 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     >>> encrypt_caesar("")
     ''
     """
-    ciphertext = ""
-    # PUT YOUR CODE HERE
-    return ciphertext
+    if shift >= 52: shift //= 52
+    chiphertext = ""
+    for i in range(len(plaintext)):
+        if plaintext[i].isalpha():
+            b = ord(plaintext[i])
+            if plaintext[i].isupper() and b >= 91 - shift:
+                chiphertext += chr(b - 26 + shift)
+            elif plaintext[i].islower() and b >= 123 - shift:
+                chiphertext += chr(b - 26 + shift)
+            else:
+                chiphertext += chr(b + shift)
+        else:
+            chiphertext += plaintext[i]
+    return chiphertext
 
 
-def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
+def decrypt_caesar(chiphertext, shift=3):
     """
     Decrypts a ciphertext using a Caesar cipher.
 
@@ -33,14 +41,28 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    for i in range(len(chiphertext)):
+        if chiphertext[i].isalpha():
+            b = ord(chiphertext[i])
+            if chiphertext[i].isupper() and b <= 64 + shift:
+                plaintext += chr(b + 26 - shift)
+            elif chiphertext[i].islower() and b <= 96 + shift:
+                plaintext += chr(b + 26 - shift)
+            else:
+                plaintext += chr(b - shift)
+        elif chiphertext.isspace():
+            continue
+        else:
+            plaintext += chiphertext[i]
     return plaintext
 
 
-def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
-    """
-    Brute force breaking a Caesar cipher.
-    """
-    best_shift = 0
-    # PUT YOUR CODE HERE
-    return best_shift
+# def caesar_breaker_brute_force(chiphertext, dictionary):
+#     """
+#     Brute force breaking a Caesar cipher.
+#     """
+#     best_shift = 0
+#     # PUT YOUR CODE HERE
+#     return best_shift
+
+print(decrypt_caesar("SBWKRQ"))

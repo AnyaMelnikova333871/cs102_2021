@@ -14,7 +14,18 @@ def is_prime(n: int) -> bool:
     False
     """
     # PUT YOUR CODE HERE
+    if a == 2:
+        return True
+    if a % 2:
+        return False
+    d  = 3
+    while d*d <= a and a % d !=0:
+        d += 2
+    return d*d > a
+
+
     pass
+print(is_prime(2))
 
 
 def gcd(a: int, b: int) -> int:

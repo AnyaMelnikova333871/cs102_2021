@@ -11,7 +11,8 @@ def encrypt_caesar(plaintext, shift=3):
     >>> encrypt_caesar("")
     ''
     """
-    if shift >= 52: shift //= 52
+    if shift >= 52:
+        shift //= 52
     chiphertext = ""
     for i in range(len(plaintext)):
         if plaintext[i].isalpha():

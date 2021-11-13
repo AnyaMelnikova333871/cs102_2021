@@ -3,8 +3,7 @@ import json
 import typing as tp
 
 import jwt
-
-from slowapi import JsonResponse, SlowAPI, Request
+from slowapi import JsonResponse, Request, SlowAPI
 from slowapi.middlewares import CORSMiddleware
 
 app = SlowAPI()

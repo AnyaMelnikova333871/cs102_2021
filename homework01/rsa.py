@@ -2,6 +2,9 @@ import random as r
 import typing as tp
 
 
+
+
+
 def is_prime(n: int) -> bool:
     """
     Tests to see if a number is prime.

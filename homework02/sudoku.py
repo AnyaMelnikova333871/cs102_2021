@@ -212,6 +212,7 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> solution = solve(grid)
     >>> check_solution(solution)
     True
+
     """
     pass
     empty_grid = [["." for i in range(9)] for j in range(9)]

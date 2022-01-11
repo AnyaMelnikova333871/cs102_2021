@@ -1,8 +1,9 @@
 import dataclasses
-import typing as tp
 import io
+import typing as tp
 
 from httpserver import HTTPRequest
+
 
 @dataclasses.dataclass
 class WSGIRequest(HTTPRequest):

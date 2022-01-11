@@ -15,13 +15,15 @@ def is_prime(n: int) -> bool:
     # идем от 2 до корня из числа + 1 (+1 на всякий случай)
     # int() что бы округлить float потому что в range() нельзя float
     # если число делится на какое-либо на отрезке от 2..sqrt(x)+1 -> оно не простое
+    if n == 1:
+        return False
     for i in range(2, int(n ** 0.5 + 1)):
         if n % i == 0:
             return False
     return True
 
 
-# print (is_prime(2))
+#print (is_prime(1))
 
 
 def gcd(a: int, b: int) -> int:

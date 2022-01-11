@@ -4,6 +4,7 @@ import random
 
 T = tp.TypeVar("T")
 
+#comment
 
 def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
     """ Прочитать Судоку из указанного файла """

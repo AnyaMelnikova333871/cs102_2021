@@ -95,7 +95,7 @@ class GameOfLife:
         """
         Не превысило ли текущее число поколений максимально допустимое.
         """
-        if self.generations >= self.max_generations:
+        if self.max_generations and self.generations >= self.max_generations:
             return True
         else:
             return False
@@ -130,4 +130,4 @@ class GameOfLife:
             for i in range(len(self.curr_generation)):
                 for j in range(len(self.curr_generation[0])):
                     string += self.curr_generation[i][j]
-            string += "\n"
+            string = string + "\n"

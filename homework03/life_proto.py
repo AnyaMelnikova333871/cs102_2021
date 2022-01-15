@@ -1,6 +1,6 @@
 import copy
-import random
 import typing as tp
+from typing import Any, List
 
 import pygame
 from pygame.locals import *
@@ -11,6 +11,8 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
+    grid: List[List[Any]]
+
     def __init__(
         self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10
     ) -> None:
@@ -64,9 +66,9 @@ class GameOfLife:
             self.get_next_generation()
             pygame.display.flip()
             clock.tick(self.speed)
-        pygame.quit()
+        pygame.QUIT()
 
-    def create_grid(self, randomize: bool = False) -> Grid:
+    def create_grid(self, randomize) -> Grid:
 
         """
         Клетка считается живой, если ее значение равно 1, в противном случае клетка
@@ -102,12 +104,7 @@ class GameOfLife:
         grid = self.create_grid(self)
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                rect = (
-                    self.cell_size * j,
-                    self.cell_size * i,
-                    self.cell_size,
-                    self.cell_size,
-                )
+                rect = (self.cell_size * j, self.cell_size * i, self.cell_size, self.cell_size)
                 pygame.draw.rect(
                     self.screen,
                     pygame.Color("green") if self.grid[i][j] == 1 else pygame.Color("white"),

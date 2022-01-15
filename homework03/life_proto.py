@@ -1,7 +1,7 @@
 import copy
 import typing as tp
 from typing import Any, List
-
+import random
 import pygame
 from pygame.locals import *
 
@@ -54,7 +54,7 @@ class GameOfLife:
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
             self.draw_grid()
             self.draw_lines()

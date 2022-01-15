@@ -129,5 +129,5 @@ class GameOfLife:
             string = ""
             for i in range(len(self.curr_generation)):
                 for j in range(len(self.curr_generation[0])):
-                    string += self.curr_generation[i][j]
-            string = string + "\n"
+                    string += str(self.curr_generation[i][j]
+            string += "\n"

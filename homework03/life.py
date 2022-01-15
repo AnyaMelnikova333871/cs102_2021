@@ -1,7 +1,7 @@
+import copy
 import pathlib
 import random
 import typing as tp
-import copy
 
 Cell = tp.Tuple[int, int]
 Cells = tp.List[int]
@@ -10,10 +10,10 @@ Grid = tp.List[Cells]
 
 class GameOfLife:
     def __init__(
-            self,
-            size: tp.Tuple[int, int],
-            randomize: bool = True,
-            max_generations: tp.Optional[float] = float("inf"),
+        self,
+        size: tp.Tuple[int, int],
+        randomize: bool = True,
+        max_generations: tp.Optional[float] = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -99,7 +99,6 @@ class GameOfLife:
             return True
         else:
             return False
-
 
     @property
     def is_changing(self) -> bool:

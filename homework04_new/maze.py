@@ -184,10 +184,10 @@ def shortest_path(
     if len(samurai) != theexit:
         x = samurai[-1][0]
         y = samurai[-1][1]
-        grid[x][y] = ""
+        grid[x][y] = "__setitem__", List[List[int]]
         p, q = samurai[-2][0], samurai[-2][1]
         shortest_path(grid, (p, q))
-    return samurai
+    return grid, samurai
 
 
 def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> bool:
@@ -225,29 +225,23 @@ def solve_maze(
     :param grid:
     :return:
     """
-     dlinax = len(thegrid)
-    dlinay = len(thegrid[0])
-    coordinate = get_exits(grid)
-    if len(coordinate) == 1:
-        return (thegrid, coordinate[0])
-    if not encircled_exit(thegrid, coordinate[0]) and not encircled_exit(thegrid, coordinate[1]):
-        for x in range(dlinax):
-            for y in range(dlinay):
-                if thegrid[x][y] == " ":
-                    thegrid[x][y] = 0
-        thegrid[coordinate[0][0]][coordinate[0][1]] = 1
-        thegrid[coordinate[1][0]][coordinate[1][1]] = 0
-        m = 1
-        while thegrid[coordinate[1][0]][coordinate[1][1]] == 0:
-            thegrid = make_step(grid, k)
-            m += 1
-        route = shortest_path(thegrid, coordinate[1])
-        for x in range(dlinax):
-            for y in range(dlinay):
-                if thegrid[x][y] != " " and thegrid[x][y] != "■":
-                    thegrid[x][y] = " "
-        return thegrid, route
-    return thegrid, None
+    exits = get_exits(grid)
+    if len(exits) != 2:
+        return None, None
+
+    x, y = exits[0][0], exits[0][1]
+    a, b = exits[1][0], exits[1][1]
+    if encircled_exit(grid, (x, y)):
+        pass
+    if encircled_exit(grid, (a, b)):
+        pass
+    k = 1
+    grid[x][y], grid[a][b] = 1, 0
+    while grid[a][b] == 0:
+        make_step(grid, k)
+        k += 1
+    grid, mariaway = shortest_path(list(grid, int(a, b)))
+    return grid, mariaway
 
 
 def add_path_to_grid(
@@ -255,10 +249,10 @@ def add_path_to_grid(
     path: Optional[Union[Tuple[int, int], List[Tuple[int, int]]]],
 ) -> List[List[Union[str, int]]]:
     """
-
-    :param grid:
-    :param path:
-    :return:
+    test
+        :param grid:
+        :param path:
+        :return:
     """
 
     if path:

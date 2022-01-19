@@ -33,7 +33,7 @@ def show_solution():
     else:
         tk.messagebox.showinfo("Message", "No solutions")
 
-        
+
 if __name__ == "__main__":
     global GRID, CELL_SIZE
     N, M = 51, 77

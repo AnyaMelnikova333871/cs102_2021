@@ -218,8 +218,8 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
 
 
 def solve_maze(
-    grid: List[List[]],
-) -> Tuple[List[List[]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
+    grid: List[List[Union[str, int]]],
+) -> Tuple[List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
     """
 
     :param grid:

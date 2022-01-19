@@ -12,15 +12,22 @@ def create_grid(rows: int = 15, cols: int = 15) -> List[List[Union[str, int]]]:
 def remove_wall(
     grid: List[List[Union[str, int]]], coord: Tuple[int, int]
 ) -> List[List[Union[str, int]]]:
+    """
 
+ 
     :param grid:
     :param coord:
     :return:
     """
-
-    x = coord[0]
-    y = coord[1]
-    grid[x][y] = " "
+    direction = choice(("up", "right"))
+    if (
+        coord[1] < len(grid[0]) - 3
+        and coord[1] % 2 != 0
+        and (coord[0] == 1 or direction == "right")
+    ):
+        grid[coord[0]][coord[1] + 1] = " "
+    elif coord[0] > 2 and coord[0] % 2 != 0 and (coord[1] == len(grid[0]) - 2 or direction == "up"):
+        grid[coord[0] - 1][coord[1]] = " "
     return grid
 
 

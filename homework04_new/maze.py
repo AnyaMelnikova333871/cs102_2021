@@ -184,7 +184,7 @@ def shortest_path(
     if len(samurai) != theexit:
         x = samurai[-1][0]
         y = samurai[-1][1]
-        grid[x][y] = "__setitem__", List[List[int]]
+        grid[x][y] = ""
         p, q = samurai[-2][0], samurai[-2][1]
         shortest_path(grid, (p, q))
     return grid, samurai

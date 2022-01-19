@@ -6,20 +6,12 @@ import pandas as pd
 
 
 # test
-def create_grid(rows: int = 15, cols: int = 15) -> List[List[Union[str, int]]]:
+def create_grid(rows: int = 15, cols: int = 15) -> #List[List[Union[str, int]]]:
     return [["■"] * cols for _ in range(rows)]
 
 
 def remove_wall(
     grid: List[List[Union[str, int]]], coord: Tuple[int, int]
-) -> List[List[Union[str, int]]]:
-    """
-
-    :param grid:
-    :param coord:
-    :return:
-    """
-grid: List[List[Union[str, int]]], coord: Tuple[int, int]
 ) -> List[List[Union[str, int]]]:
     """
     :param grid:
@@ -29,7 +21,7 @@ grid: List[List[Union[str, int]]], coord: Tuple[int, int]
     # check check
     thechoice = ["up", "right"]
     i, j = coord[0], coord[1]
-    route = choice(choize)
+    route = choice(thechoice)
     if route == "up":
         if i == 1:
             grid[i][j + 1] = " "
@@ -164,7 +156,7 @@ def shortest_path(
     :param exit_coord:
     :return:
     """
-
+    a, b = exit_coord[0], exit_coord[1]
     theexit = grid[exit_coord[0]][exit_coord[1]]
     k = grid[a][b] - 1
     samurai = []
@@ -192,7 +184,7 @@ def shortest_path(
     if len(samurai) != theexit:
         x = samurai[-1][0]
         y = samurai[-1][1]
-        grid[x][y] = List[List[str, int]]
+        grid[x][y] = SupportsIndex(List[List[str, int]])
         p, q = samurai[-2][0], samurai[-2][1]
         shortest_path(grid, (p, q))
     return grid, samurai

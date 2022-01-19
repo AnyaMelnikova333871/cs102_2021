@@ -14,15 +14,7 @@ def remove_wall(
 ) -> List[List[Union[str, int]]]:
     """
 
-    :param grid:
-    :param coord:
-    :return:
-    """
 
-    x = coord[0]
-    y = coord[1]
-    grid[x][y] = " "
-    return grid
 
 def bin_tree_maze(
     rows: int = 15, cols: int = 15, random_exit: bool = True

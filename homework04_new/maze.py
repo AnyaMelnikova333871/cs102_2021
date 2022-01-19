@@ -218,29 +218,33 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
 
 
 def solve_maze(
-      dlinax = len(thegrid)
-     dlinay = len(thegrid[0])
-     coordinate = get_exits(grid)
-     if len(coordinate) == 1:
-         return (thegrid, coordinate[0])
-     if not encircled_exit(thegrid, coordinate[0]) and not encircled_exit(thegrid, coordinate[1]):
-         for x in range(dlinax):
-             for y in range(dlinay):
-                 if thegrid[x][y] == " ":
-                     thegrid[x][y] = 0
-         thegrid[coordinate[0][0]][coordinate[0][1]] = 1
-         thegrid[coordinate[1][0]][coordinate[1][1]] = 0
-         m = 1
-         while thegrid[coordinate[1][0]][coordinate[1][1]] == 0:
-             thegrid = make_step(grid, k)
-             m += 1
-         route = shortest_path(thegrid, coordinate[1])
-         for x in range(dlinax):
-             for y in range(dlinay):
-                 if thegrid[x][y] != " " and thegrid[x][y] != "■":
-                     thegrid[x][y] = " "
-         return thegrid, route
-     return thegrid, None
+    grid,
+):
+
+    lnx = len(grid)
+    lny = len(grid[0])
+    coordinate = get_exits(grid)
+    if len(coordinate) == 1:
+        return (grid, coordinate[0])
+    if not encircled_exit(grid, coordinate[0]) and not encircled_exit(thegrid, coordinate[1]):
+        for x in range(lnx):
+            for y in range(lny):
+                if grid[x][y] == " ":
+                    grid[x][y] = 0
+        grid[coordinate[0][0]][coordinate[0][1]] = 1
+        grid[coordinate[1][0]][coordinate[1][1]] = 0
+        m = 1
+        while grid[coordinate[1][0]][coordinate[1][1]] == 0:
+            grid = make_step(grid, k)
+            m += 1
+        route = shortest_path(thegrid, coordinate[1])
+        for x in range(lnx):
+            for y in range(lny):
+                if grid[x][y] != " " and grid[x][y] != "■":
+                    grid[x][y] = " "
+        return grid, route
+    return grid, None
+
 
 def add_path_to_grid(
     grid: List[List[Union[str, int]]],

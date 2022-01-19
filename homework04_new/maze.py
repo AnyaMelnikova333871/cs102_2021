@@ -225,23 +225,29 @@ def solve_maze(
     :param grid:
     :return:
     """
-    exits = get_exits(grid)
-    if len(exits) != 2:
-        return None, None
-
-    x, y = exits[0][0], exits[0][1]
-    a, b = exits[1][0], exits[1][1]
-    if encircled_exit(grid, (x, y)):
-        pass
-    if encircled_exit(grid, (a, b)):
-        pass
-    k = 1
-    grid[x][y], grid[a][b] = 1, 0
-    while grid[a][b] == 0:
-        make_step(grid, k)
-        k += 1
-    grid, theway = shortest_path(int(grid, (a, b)))
-    return grid, theway
+     dlinax = len(thegrid)
+    dlinay = len(thegrid[0])
+    coordinate = get_exits(grid)
+    if len(coordinate) == 1:
+        return (thegrid, coordinate[0])
+    if not encircled_exit(thegrid, coordinate[0]) and not encircled_exit(thegrid, coordinate[1]):
+        for x in range(dlinax):
+            for y in range(dlinay):
+                if thegrid[x][y] == " ":
+                    thegrid[x][y] = 0
+        thegrid[coordinate[0][0]][coordinate[0][1]] = 1
+        thegrid[coordinate[1][0]][coordinate[1][1]] = 0
+        m = 1
+        while thegrid[coordinate[1][0]][coordinate[1][1]] == 0:
+            thegrid = make_step(grid, k)
+            m += 1
+        route = shortest_path(thegrid, coordinate[1])
+        for x in range(dlinax):
+            for y in range(dlinay):
+                if thegrid[x][y] != " " and thegrid[x][y] != "■":
+                    thegrid[x][y] = " "
+        return thegrid, route
+    return thegrid, None
 
 
 def add_path_to_grid(

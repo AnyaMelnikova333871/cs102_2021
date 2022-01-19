@@ -187,7 +187,7 @@ def shortest_path(
         grid[x][y] = ""
         p, q = samurai[-2][0], samurai[-2][1]
         shortest_path(grid, (p, q))
-    return grid, samurai
+    return samurai
 
 
 def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> bool:

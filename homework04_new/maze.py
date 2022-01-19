@@ -240,7 +240,7 @@ def solve_maze(
     while grid[a][b] == 0:
         make_step(grid, k)
         k += 1
-    grid, dawae = shortest_path(grid, (a, b))
+    grid, dawae = shortest_path(int(grid, (a, b)))
     return grid, theway
 
 

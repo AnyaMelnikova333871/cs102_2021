@@ -226,7 +226,7 @@ def solve_maze(
     coordinate = get_exits(grid)
     if len(coordinate) == 1:
         return (grid, coordinate[0])
-    if not encircled_exit(grid, coordinate[0]) and not encircled_exit(thegrid, coordinate[1]):
+    if not encircled_exit(grid, coordinate[0]) or not encircled_exit(thegrid, coordinate[1]):
         for x in range(lnx):
             for y in range(lny):
                 if grid[x][y] == " ":

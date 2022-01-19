@@ -51,7 +51,7 @@ def bin_tree_maze(
     # 3. перейти в следующую клетку, сносим между клетками стену
     # 4. повторять 2-3 до тех пор, пока не будут пройдены все клетки
 
-    thechoice  = ["up", "right"]
+    thechoice = ["up", "right"]
     for i in range(len(grid) - 2, 0, -2):
         for j in range(1, len(grid[0]) - 1, 2):
             if i == 1 and j == len(grid) - 2:
@@ -100,7 +100,7 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
         x, y = possibles[j][0], possibles[j][1]
         if grid[x][y] == "X" and (x, y) not in exits:
             exits.append((x, y))
-    #print(exits)
+    # print(exits)
     return exits
 
 
@@ -255,13 +255,13 @@ def add_path_to_grid(
 
 
 if __name__ == "__main__":
-    '''
+    """
     GRID = bin_tree_maze(15, 15)
     print(pd.DataFrame(GRID))
     MAZE, PATH = solve_maze(GRID)
     MAZE = add_path_to_grid(MAZE, PATH)
     print(pd.DataFrame(MAZE))
-    '''
+    """
     print(pd.DataFrame(bin_tree_maze(15, 15)))
     GRID = bin_tree_maze(15, 15)
     print(pd.DataFrame(GRID))

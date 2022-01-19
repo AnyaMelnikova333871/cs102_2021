@@ -158,7 +158,7 @@ def shortest_path(
     """
     a, b = exit_coord[0], exit_coord[1]
     theexit = grid[exit_coord[0]][exit_coord[1]]
-    k = grid[a][b] - 1
+    k =int(grid[a][b] - 1) 
     samurai = []
     current = a, b
     samurai.append(current)

@@ -18,8 +18,9 @@ def remove_wall(
     :param coord:
     :return:
     """
-    # check
-    x, y = coord[0], coord[1]
+
+    x = coord[0]
+    y = coord[1]
     grid[x][y] = " "
     return grid
 
@@ -39,7 +40,7 @@ def bin_tree_maze(
     empty_cells = []
     for x, row in enumerate(grid):
         for y, _ in enumerate(row):
-            if x % 2 == 1 and y % 2 == 1:
+            if x % 2 != 0 and y % 2 != 0:
                 grid[x][y] = " "
                 empty_cells.append((x, y))
 
@@ -50,17 +51,18 @@ def bin_tree_maze(
     # 3. перейти в следующую клетку, сносим между клетками стену
     # 4. повторять 2-3 до тех пор, пока не будут пройдены все клетки
 
-    choize = ["up", "right"]
+    thechoice  = ["up", "right"]
     for i in range(len(grid) - 2, 0, -2):
         for j in range(1, len(grid[0]) - 1, 2):
             if i == 1 and j == len(grid) - 2:
                 break
-            direction = choice(choize)
+            direction = choice(thechoice)
             if direction == "up":
                 if i == 1:
                     remove_wall(grid, (i, j + 1))
                 else:
                     remove_wall(grid, (i - 1, j))
+
             else:
                 if j == len(grid) - 2:
                     remove_wall(grid, (i - 1, j))
@@ -144,12 +146,12 @@ def shortest_path(
     :param exit_coord:
     :return:
     """
-    a, b = exit_coord[0], exit_coord[1]
-    ex = grid[a][b]
+
+    theexit = grid[exit_coord[0]][exit_coord[1]]
     k = grid[a][b] - 1
-    dawae = []
+    samurai = []
     current = a, b
-    dawae.append(current)
+    samurai.append(current)
     while k != 0:
         if a + 1 < len(grid):
             if grid[a + 1][b] == k:
@@ -167,15 +169,15 @@ def shortest_path(
             if grid[a][b - 1] == k:
                 current = a, b - 1
                 b -= 1
-        dawae.append(current)
+        samurai.append(current)
         k -= 1
-    if len(dawae) != ex:
-        x = dawae[-1][0]
-        y = dawae[-1][1]
-        grid[x][y] = " "
-        q, w = dawae[-2][0], dawae[-2][1]
-        shortest_path(grid, (q, w))
-    return grid, dawae
+    if len(samurai) != theexit:
+        x = samurai[-1][0]
+        y = samurai[-1][1]
+        grid[x][y] = List[List[str, int]]
+        p, q = samurai[-2][0], samurai[-2][1]
+        shortest_path(grid, (p, q))
+    return grid, samurai
 
 
 def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> bool:
@@ -213,7 +215,6 @@ def solve_maze(
     :param grid:
     :return:
     """
-
     exits = get_exits(grid)
     if len(exits) != 2:
         return None
@@ -221,9 +222,9 @@ def solve_maze(
     x, y = exits[0][0], exits[0][1]
     a, b = exits[1][0], exits[1][1]
     if encircled_exit(grid, (x, y)):
-        return None
+        pass
     if encircled_exit(grid, (a, b)):
-        return None
+        pass
     k = 1
     grid[x][y], grid[a][b] = 1, 0
     while grid[a][b] == 0:
@@ -254,6 +255,13 @@ def add_path_to_grid(
 
 
 if __name__ == "__main__":
+    '''
+    GRID = bin_tree_maze(15, 15)
+    print(pd.DataFrame(GRID))
+    MAZE, PATH = solve_maze(GRID)
+    MAZE = add_path_to_grid(MAZE, PATH)
+    print(pd.DataFrame(MAZE))
+    '''
     print(pd.DataFrame(bin_tree_maze(15, 15)))
     GRID = bin_tree_maze(15, 15)
     print(pd.DataFrame(GRID))

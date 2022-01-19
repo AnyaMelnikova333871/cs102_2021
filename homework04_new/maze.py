@@ -19,10 +19,27 @@ def remove_wall(
     :param coord:
     :return:
     """
-
-    x = coord[0]
-    y = coord[1]
-    grid[x][y] = " "
+grid: List[List[Union[str, int]]], coord: Tuple[int, int]
+) -> List[List[Union[str, int]]]:
+    """
+    :param grid:
+    :param coord:
+    :return:
+    """
+    # check check
+    thechoice = ["up", "right"]
+    i, j = coord[0], coord[1]
+    route = choice(choize)
+    if route == "up":
+        if i == 1:
+            grid[i][j + 1] = " "
+        else:
+            grid[i - 1][j] = " "
+    else:
+        if j == len(grid) - 2:
+            grid[i - 1][j] = " "
+        else:
+            grid[i][j + 1] = " "
     return grid
 
 

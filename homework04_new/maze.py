@@ -1,11 +1,10 @@
-from copy import deepcopy
+import random
 from random import choice, randint
 from typing import List, Optional, Tuple, Union
 
 import pandas as pd
 
 
-# test
 def create_grid(rows: int = 15, cols: int = 15):
     return [["■"] * cols for _ in range(rows)]
 
@@ -18,20 +17,19 @@ def remove_wall(
     :param coord:
     :return:
     """
-    # check check
     thechoice = ["up", "right"]
     i, j = coord[0], coord[1]
-    route = choice(thechoice)
+    route = random.choice(thechoice)
     if route == "up":
-        if i == 1:
-            grid[i][j + 1] = " "
-        else:
+        if i != 1:
             grid[i - 1][j] = " "
+        elif j + 2 != len(grid[0]):
+            grid[i][j + 1] = " "
     else:
-        if j == len(grid) - 2:
-            grid[i - 1][j] = " "
-        else:
+        if j + 2 != len(grid[0]):
             grid[i][j + 1] = " "
+        elif i != 1:
+            grid[i - 1][j] = " "
     return grid
 
 
@@ -39,7 +37,6 @@ def bin_tree_maze(
     rows: int = 15, cols: int = 15, random_exit: bool = True
 ) -> List[List[Union[str, int]]]:
     """
-
     :param rows:
     :param cols:
     :param random_exit:
@@ -59,25 +56,10 @@ def bin_tree_maze(
     # Если в выбранном направлении следующая клетка лежит за границами поля,
     # выбрать второе возможное направление
     # 3. перейти в следующую клетку, сносим между клетками стену
-    # 4. повторять 2-3 до тех пор, пока не будут пройдены все клеткиbbb
+    # 4. повторять 2-3 до тех пор, пока не будут пройдены все клетки
 
-    thechoice = ["up", "right"]
-    for i in range(len(grid) - 2, 0, -2):
-        for j in range(1, len(grid[0]) - 1, 2):
-            if i == 1 and j == len(grid) - 2:
-                break
-            direction = choice(thechoice)
-            if direction == "up":
-                if i == 1:
-                    remove_wall(grid, (i, j + 1))
-                else:
-                    remove_wall(grid, (i - 1, j))
-
-            else:
-                if j == len(grid) - 2:
-                    remove_wall(grid, (i - 1, j))
-                else:
-                    remove_wall(grid, (i, j + 1))
+    for i in empty_cells:
+        grid = remove_wall(grid, i)
 
     # генерация входа и выхода
     if random_exit:
@@ -95,7 +77,6 @@ def bin_tree_maze(
 
 def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     """
-
     :param grid:
     :return:
     """
@@ -116,7 +97,6 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
 
 def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str, int]]]:
     """
-
     :param grid:
     :param k:
     :return:
@@ -151,7 +131,6 @@ def shortest_path(
     grid: List[List[Union[str, int]]], exit_coord: Tuple[int, int]
 ) -> Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]:
     """
-
     :param grid:
     :param exit_coord:
     :return:
@@ -192,7 +171,6 @@ def shortest_path(
 
 def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> bool:
     """
-
     :param grid:
     :param coord:
     :return:
@@ -225,8 +203,8 @@ def solve_maze(
     lny = len(grid[0])
     coordinate = get_exits(grid)
     if len(coordinate) == 1:
-        return (grid, coordinate[0])
-    if not encircled_exit(grid, coordinate[0]) or not encircled_exit(thegrid, coordinate[1]):
+        return grid, coordinate[0]
+    if not encircled_exit(grid, coordinate[0]) and not encircled_exit(grid, coordinate[1]):
         for x in range(lnx):
             for y in range(lny):
                 if grid[x][y] == " ":
@@ -235,9 +213,9 @@ def solve_maze(
         grid[coordinate[1][0]][coordinate[1][1]] = 0
         m = 1
         while grid[coordinate[1][0]][coordinate[1][1]] == 0:
-            grid = make_step(grid, k)
+            grid = make_step(grid, m)
             m += 1
-        route = shortest_path(thegrid, coordinate[1])
+        route = shortest_path(grid, coordinate[1])
         for x in range(lnx):
             for y in range(lny):
                 if grid[x][y] != " " and grid[x][y] != "■":

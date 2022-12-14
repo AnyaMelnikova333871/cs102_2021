@@ -46,7 +46,6 @@ def decrypt_vigenere(ciphertext, keyword):
     plaintext = ""
     a = 0
 
-
     while len(ciphertext) > len(keyword):
         keyword += keyword[a]
         a += 1
